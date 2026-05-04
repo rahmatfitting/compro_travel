@@ -5,6 +5,7 @@ import AboutSection from '@/components/Home/AboutSection';
 import FeaturesSection from '@/components/Home/FeaturesSection';
 import ExperienceSection from '@/components/Home/ExperienceSection';
 import WhyUsSection from '@/components/Home/WhyUsSection';
+import BlogGrid from '@/components/Blog/BlogGrid';
 import TestimonialsSection from '@/components/Home/TestimonialsSection';
 import BookingFlowSection from '@/components/Home/BookingFlowSection';
 import CTASection from '@/components/Home/CTASection';
@@ -19,6 +20,9 @@ export default function Home() {
         <FeaturesSection />
         <ExperienceSection />
         <WhyUsSection />
+        <div id="blog">
+          <BlogGrid />
+        </div>
         <TestimonialsSection />
         <BookingFlowSection />
         <CTASection />

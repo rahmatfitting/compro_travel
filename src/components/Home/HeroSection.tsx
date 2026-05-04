@@ -4,28 +4,31 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
+import { useContent } from '@/context/ContentContext';
+import { trackEvent } from '@/lib/analytics';
 
 export default function HeroSection() {
   const [visible, setVisible] = useState(false);
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
+  const { content } = useContent();
 
-  const carouselImages = [
+  const destinations = content.gallery?.list || [];
+  const carouselImages = destinations.length > 0 ? destinations.map((d: any) => d.image) : [
     '/exp_santorini.png',
     '/exp_maldives.png',
     '/exp_swiss_alps.png',
-    '/exp_paris.png',
-    '/exp_amalfi.png',
   ];
 
   const [currentImg, setCurrentImg] = useState(0);
 
   useEffect(() => {
     setVisible(true);
+    if (carouselImages.length <= 1) return;
     const timer = setInterval(() => {
       setCurrentImg((prev) => (prev + 1) % carouselImages.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [carouselImages.length]);
 
   return (
     <section id="hero" style={{
@@ -111,7 +114,7 @@ export default function HeroSection() {
                 boxShadow: '0 0 8px rgba(212, 175, 55, 0.5)',
                 animation: 'pulse-glow 2s ease-in-out infinite',
               }} />
-              {t.hero.badge}
+              {content.hero.badge}
             </div>
 
             {/* Heading */}
@@ -123,7 +126,7 @@ export default function HeroSection() {
               marginBottom: '24px',
               letterSpacing: '-0.02em',
             }}>
-              <span style={{ color: 'var(--text-primary)' }}>{language === 'id' ? 'Rasakan ' : 'Experience '}</span>
+              <span style={{ color: 'var(--text-primary)' }}>{content.hero.title1}</span>
               <br />
               <span style={{
                 background: 'linear-gradient(135deg, #d4af37, #996515)',
@@ -131,7 +134,7 @@ export default function HeroSection() {
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
               }}>
-                {language === 'id' ? 'Kemewahan Tanpa Batas' : 'Limitless Luxury'}
+                {content.hero.title2}
               </span>
             </h1>
 
@@ -143,17 +146,27 @@ export default function HeroSection() {
               marginBottom: '40px',
               maxWidth: '560px',
             }}>
-              {t.hero.subtitle}
+              {content.hero.subtitle}
             </p>
 
             {/* CTA Buttons */}
             <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-              <Link href="/contact" className="btn-primary" style={{ padding: '16px 36px', borderRadius: '14px', fontSize: '1rem' }}>
-                {t.hero.ctaPrimary}
+              <Link 
+                href="/contact" 
+                className="btn-primary" 
+                style={{ padding: '16px 36px', borderRadius: '14px', fontSize: '1rem' }}
+                onClick={() => trackEvent('hero_cta_primary', { category: 'conversion' })}
+              >
+                {content.hero.ctaPrimary}
               </Link>
 
-              <Link href="/#destinations" className="btn-secondary" style={{ padding: '16px 36px', borderRadius: '14px', fontSize: '1rem' }}>
-                {t.hero.ctaSecondary}
+              <Link 
+                href="/#destinations" 
+                className="btn-secondary" 
+                style={{ padding: '16px 36px', borderRadius: '14px', fontSize: '1rem' }}
+                onClick={() => trackEvent('hero_cta_secondary', { category: 'engagement' })}
+              >
+                {content.hero.ctaSecondary}
               </Link>
             </div>
 
@@ -167,7 +180,7 @@ export default function HeroSection() {
                 fontWeight: 600,
                 marginBottom: '20px',
               }}>
-                {t.hero.trusted}
+                {content.hero.trusted}
               </p>
               <div style={{
                 display: 'flex',
@@ -238,11 +251,7 @@ export default function HeroSection() {
                   zIndex: 2,
                   boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
                 }}>
-                  {currentImg === 0 && 'Featured: Santorini'}
-                  {currentImg === 1 && 'Featured: Maldives'}
-                  {currentImg === 2 && 'Featured: Swiss Alps'}
-                  {currentImg === 3 && 'Featured: Paris'}
-                  {currentImg === 4 && 'Featured: Amalfi Coast'}
+                  Featured: {destinations[currentImg]?.name || (currentImg === 0 ? 'Santorini' : currentImg === 1 ? 'Maldives' : 'Swiss Alps')}
                 </div>
 
                 {/* Progress Indicators */}
@@ -273,7 +282,7 @@ export default function HeroSection() {
               <div style={{ padding: '24px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
                   <h3 style={{ fontFamily: 'Space Grotesk, sans-serif', fontSize: '1.4rem', fontWeight: 700, color: 'var(--text-primary)' }}>
-                    The Aegean Dream
+                    {destinations[currentImg]?.name || 'The Aegean Dream'}
                   </h3>
                   <div style={{ display: 'flex', gap: '4px' }}>
                     {[1,2,3,4,5].map(i => (
@@ -284,7 +293,7 @@ export default function HeroSection() {
                   </div>
                 </div>
                 <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '24px' }}>
-                  Enjoy exclusive access to a private caldera-view villa with a personal chef and sunset yacht tour.
+                  {destinations[currentImg] ? `Experience the beauty of ${destinations[currentImg].location} with our exclusive premium package.` : 'Enjoy exclusive access to a private caldera-view villa with a personal chef and sunset yacht tour.'}
                 </p>
                 <div style={{ display: 'flex', gap: '12px' }}>
                    <div style={{ flex: 1, padding: '12px', borderRadius: '16px', background: 'var(--bg-tertiary)', border: '1px solid var(--border-subtle)' }}>

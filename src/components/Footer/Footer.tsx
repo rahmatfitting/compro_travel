@@ -2,27 +2,29 @@
 
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
+import { useContent } from '@/context/ContentContext';
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { language } = useLanguage();
+  const { content } = useContent();
   const currentYear = new Date().getFullYear();
 
   const footerLinks = {
     services: [
-      { label: t.footer.links.features, href: '/#services' },
-      { label: t.footer.links.pricing, href: '/#services' },
-      { label: t.footer.links.solutions, href: '/#destinations' },
+      { label: content.footer.links.features, href: '/#services' },
+      { label: content.footer.links.pricing, href: '/#services' },
+      { label: content.footer.links.solutions, href: '/#destinations' },
       { label: 'Executive Concierge', href: '/#services' },
     ],
     company: [
-      { label: t.footer.links.about, href: '/#about' },
-      { label: t.footer.links.careers, href: '/' },
-      { label: t.footer.links.contact, href: '/contact' },
+      { label: content.footer.links.about, href: '/#about' },
+      { label: 'Careers', href: '/' },
+      { label: content.footer.links.contact, href: '/contact' },
     ],
     information: [
-      { label: t.footer.links.docs, href: '/' },
-      { label: t.footer.links.help, href: '/' },
-      { label: t.footer.links.privacy, href: '/' },
+      { label: 'Terms & Conditions', href: '/' },
+      { label: content.footer.links.help, href: '/' },
+      { label: 'Privacy Policy', href: '/' },
     ],
   };
 
@@ -92,7 +94,7 @@ export default function Footer() {
               maxWidth: '320px',
               marginBottom: '24px',
             }}>
-              {t.footer.tagline}
+              {content.footer.tagline}
             </p>
             {/* Social Icons */}
             <div style={{ display: 'flex', gap: '12px' }}>
@@ -142,7 +144,7 @@ export default function Footer() {
               letterSpacing: '1.5px',
               color: 'var(--text-primary)',
               marginBottom: '20px',
-            }}>{t.footer.product}</h4>
+            }}>{content.footer.product}</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {footerLinks.services.map((link) => (
                 <Link key={link.label} href={link.href} style={{
@@ -169,7 +171,7 @@ export default function Footer() {
               letterSpacing: '1.5px',
               color: 'var(--text-primary)',
               marginBottom: '20px',
-            }}>{t.footer.company}</h4>
+            }}>{content.footer.company}</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {footerLinks.company.map((link) => (
                 <Link key={link.label} href={link.href} style={{
@@ -196,7 +198,7 @@ export default function Footer() {
               letterSpacing: '1.5px',
               color: 'var(--text-primary)',
               marginBottom: '20px',
-            }}>{t.footer.resources}</h4>
+            }}>{content.footer.resources}</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {footerLinks.information.map((link) => (
                 <Link key={link.label} href={link.href} style={{
@@ -230,12 +232,21 @@ export default function Footer() {
           gap: '16px',
         }}>
           <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-            © {currentYear} LuxeVoyage. {t.footer.rights}
+            © {currentYear} LuxeVoyage. {content.footer.rights}
           </p>
-          <div style={{ display: 'flex', gap: '24px' }}>
-            <a href="#" style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>{t.footer.links.privacy}</a>
-            <a href="#" style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Terms of Service</a>
-            <a href="#" style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Cookie Policy</a>
+          <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+            <Link href="/admin" style={{ 
+              color: '#d4af37', 
+              fontSize: '0.8rem', 
+              fontWeight: 700,
+              textDecoration: 'none',
+              padding: '4px 10px',
+              borderRadius: '6px',
+              border: '1px solid rgba(212, 175, 55, 0.2)',
+              background: 'rgba(212, 175, 55, 0.05)'
+            }}>CMS Admin</Link>
+            <a href="#" style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Privacy</a>
+            <a href="#" style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Terms</a>
           </div>
         </div>
       </div>

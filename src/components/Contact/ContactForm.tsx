@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
+import { trackEvent } from '@/lib/analytics';
 
 export default function ContactForm() {
   const { language } = useLanguage();
@@ -49,6 +50,10 @@ export default function ContactForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
+    trackEvent('contact_form_submit', { 
+      category: 'conversion', 
+      subject: formData.subject 
+    });
     setTimeout(() => setSubmitted(false), 5000);
   };
 

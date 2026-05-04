@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
+import { trackEvent } from '@/lib/analytics';
 
 export default function CTASection() {
   const { t, language } = useLanguage();
@@ -113,6 +114,7 @@ export default function CTASection() {
                 e.currentTarget.style.transform = 'translateY(0)';
                 e.currentTarget.style.boxShadow = '0 4px 20px rgba(212, 175, 55, 0.3)';
               }}
+              onClick={() => trackEvent('cta_section_click', { category: 'conversion' })}
               >
                 {t.cta.button}
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">

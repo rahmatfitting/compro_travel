@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
+import { trackEvent } from '@/lib/analytics';
 
 type Message = {
   text: string;
@@ -45,6 +46,7 @@ export default function ChatWidget() {
   }, [isOpen]);
 
   const toggleChat = () => {
+    if (!isOpen) trackEvent('chat_open', { category: 'engagement' });
     setIsOpen(!isOpen);
     setShowNotification(false);
   };
@@ -62,6 +64,7 @@ export default function ChatWidget() {
     setMessages(prev => [...prev, userMsg]);
     setInputValue('');
     setIsTyping(true);
+    trackEvent('chat_message_sent', { category: 'engagement', label: inputValue });
 
     // Mock Bot Response
     setTimeout(() => {
@@ -83,6 +86,7 @@ export default function ChatWidget() {
     };
     setMessages(prev => [...prev, userMsg]);
     setIsTyping(true);
+    trackEvent('chat_option_click', { category: 'engagement', label: label });
 
     setTimeout(() => {
       setIsTyping(false);

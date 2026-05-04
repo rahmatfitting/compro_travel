@@ -1,60 +1,13 @@
 'use client';
 
 import { useLanguage } from '@/context/LanguageContext';
+import { useContent } from '@/context/ContentContext';
 
 export default function FeaturesSection() {
-  const { t } = useLanguage();
+  const { language } = useLanguage();
+  const { content } = useContent();
 
-  const features = [
-    {
-      icon: '✈️',
-      title: t.features.modules.luxury_tours.title,
-      description: t.features.modules.luxury_tours.desc,
-      color: '#996515',
-      gradient: 'linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(241, 196, 15, 0.08))',
-      borderColor: 'rgba(212, 175, 55, 0.2)',
-    },
-    {
-      icon: '🛥️',
-      title: t.features.modules.private_charter.title,
-      description: t.features.modules.private_charter.desc,
-      color: '#b8860b',
-      gradient: 'linear-gradient(135deg, rgba(241, 196, 15, 0.12), rgba(153, 101, 21, 0.08))',
-      borderColor: 'rgba(241, 196, 15, 0.2)',
-    },
-    {
-      icon: '🥂',
-      title: t.features.modules.concierge.title,
-      description: t.features.modules.concierge.desc,
-      color: '#996515',
-      gradient: 'linear-gradient(135deg, rgba(153, 101, 21, 0.12), rgba(212, 175, 55, 0.08))',
-      borderColor: 'rgba(153, 101, 21, 0.2)',
-    },
-    {
-      icon: '🛂',
-      title: t.features.modules.visa_logistics.title,
-      description: t.features.modules.visa_logistics.desc,
-      color: '#996515',
-      gradient: 'linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(241, 196, 15, 0.08))',
-      borderColor: 'rgba(212, 175, 55, 0.2)',
-    },
-    {
-      icon: '🏰',
-      title: t.features.modules.stay.title,
-      description: t.features.modules.stay.desc,
-      color: '#b8860b',
-      gradient: 'linear-gradient(135deg, rgba(241, 196, 15, 0.12), rgba(153, 101, 21, 0.08))',
-      borderColor: 'rgba(241, 196, 15, 0.2)',
-    },
-    {
-      icon: '🎨',
-      title: t.features.modules.experience.title,
-      description: t.features.modules.experience.desc,
-      color: '#996515',
-      gradient: 'linear-gradient(135deg, rgba(153, 101, 21, 0.12), rgba(212, 175, 55, 0.08))',
-      borderColor: 'rgba(153, 101, 21, 0.2)',
-    },
-  ];
+  const products = content.products?.list || [];
 
   return (
     <section id="services" style={{
@@ -81,7 +34,7 @@ export default function FeaturesSection() {
         {/* Section Header */}
         <div style={{ textAlign: 'center', marginBottom: '64px' }}>
           <div className="section-label">
-            ✦ {t.features.badge}
+            ✦ Luxury Services
           </div>
           <h2 style={{
             fontFamily: 'Space Grotesk, sans-serif',
@@ -94,7 +47,7 @@ export default function FeaturesSection() {
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
           }}>
-            {t.features.title}
+            Exclusive Travel Solutions
           </h2>
           <p style={{
             fontSize: '1.1rem',
@@ -103,37 +56,36 @@ export default function FeaturesSection() {
             margin: '0 auto',
             lineHeight: 1.8,
           }}>
-            {t.features.subtitle}
+            Experience world-class hospitality and seamless travel planning tailored to your most exacting standards.
           </p>
         </div>
 
         {/* Features Grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
           gap: '24px',
         }}
         className="features-grid"
         >
-          {features.map((feature, i) => (
+          {products.map((product: any, i: number) => (
             <div
-              key={feature.title}
+              key={product.id}
               style={{
                 padding: '36px',
-                borderRadius: '20px',
-                background: feature.gradient,
-                border: `1px solid ${feature.borderColor}`,
+                borderRadius: '24px',
+                background: `linear-gradient(135deg, ${product.color}10, ${product.color}05)`,
+                border: `1px solid ${product.color}20`,
                 backdropFilter: 'blur(12px)',
                 transition: 'all 0.3s ease',
                 cursor: 'default',
                 position: 'relative',
                 overflow: 'hidden',
-                animation: `fadeInUp 0.6s ease ${i * 0.1}s both`,
                 boxShadow: '0 4px 12px rgba(0,0,0,0.03)',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-6px)';
-                e.currentTarget.style.boxShadow = `0 12px 40px rgba(212, 175, 55, 0.15)`;
+                e.currentTarget.style.boxShadow = `0 12px 40px ${product.color}20`;
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)';
@@ -154,7 +106,7 @@ export default function FeaturesSection() {
                 marginBottom: '20px',
                 boxShadow: '0 4px 10px rgba(0,0,0,0.05)',
               }}>
-                {feature.icon}
+                {product.icon}
               </div>
 
               <h3 style={{
@@ -164,31 +116,31 @@ export default function FeaturesSection() {
                 color: 'var(--text-primary)',
                 marginBottom: '12px',
               }}>
-                {feature.title}
+                {product.title}
               </h3>
 
               <p style={{
                 fontSize: '0.9rem',
                 color: 'var(--text-secondary)',
                 lineHeight: 1.7,
+                marginBottom: '20px',
               }}>
-                {feature.description}
+                {product.description}
               </p>
 
-              {/* Arrow */}
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                marginTop: '20px',
-                fontSize: '0.85rem',
-                fontWeight: 600,
-                color: feature.color,
-              }}>
-                {t.features.learnMore}
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                {product.features?.slice(0, 3).map((f: string, idx: number) => (
+                  <span key={idx} style={{ 
+                    fontSize: '0.7rem', 
+                    padding: '4px 10px', 
+                    borderRadius: '100px', 
+                    background: 'white', 
+                    border: `1px solid ${product.color}30`,
+                    color: '#64748b' 
+                  }}>
+                    {f}
+                  </span>
+                ))}
               </div>
             </div>
           ))}
@@ -196,10 +148,6 @@ export default function FeaturesSection() {
       </div>
 
       <style jsx global>{`
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
         @media (max-width: 1024px) {
           .features-grid {
             grid-template-columns: repeat(2, 1fr) !important;

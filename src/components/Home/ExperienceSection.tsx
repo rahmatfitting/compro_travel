@@ -1,30 +1,19 @@
 'use client';
 
 import { useLanguage } from '@/context/LanguageContext';
+import { useContent } from '@/context/ContentContext';
 
 export default function ExperienceSection() {
   const { t } = useLanguage();
+  const { content } = useContent();
 
-  const destinations = [
-    {
-      name: 'Swiss Alps',
-      location: 'Switzerland',
-      image: '/exp_swiss_alps.png',
-      tag: 'Adventure'
-    },
-    {
-      name: 'Baa Atoll',
-      location: 'Maldives',
-      image: '/exp_maldives.png',
-      tag: 'Relaxation'
-    },
-    {
-      name: 'Oia',
-      location: 'Santorini',
-      image: '/exp_santorini.png',
-      tag: 'Romantic'
-    }
-  ];
+  const galleryData = content.gallery || {
+    title: 'Curated World Destinations',
+    subtitle: 'Handpicked locations that offer the perfect blend of natural beauty and human ingenuity.',
+    list: []
+  };
+
+  const destinations = galleryData.list || [];
 
   return (
     <section id="destinations" className="section" style={{ background: 'var(--bg-secondary)' }}>
@@ -34,10 +23,10 @@ export default function ExperienceSection() {
             {t.navbar.destinations}
           </span>
           <h2 className="section-title">
-            Curated World Destinations
+            {galleryData.title}
           </h2>
           <p className="section-subtitle" style={{ margin: '0 auto' }}>
-            Handpicked locations that offer the perfect blend of natural beauty and human ingenuity.
+            {galleryData.subtitle}
           </p>
         </div>
 

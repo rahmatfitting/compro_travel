@@ -3,61 +3,14 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
-
-const blogPosts = [
-  {
-    id: 1,
-    title: {
-      id: '5 Destinasi Rahasia di Maladewa untuk Liburan Privat',
-      en: '5 Hidden Gems in Maldives for a Private Getaway'
-    },
-    excerpt: {
-      id: 'Temukan pulau-pulau tak berpenghuni dengan pasir putih kristal yang jarang diketahui oleh turis umum.',
-      en: 'Discover uninhabited islands with crystal white sand that are rarely known by general tourists.'
-    },
-    category: { id: 'Destinasi', en: 'Destination' },
-    date: '2024-05-15',
-    image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&q=80&w=800',
-    readTime: '6 min read',
-    author: 'Elena Wijaya'
-  },
-  {
-    id: 2,
-    title: {
-      id: 'Tren Wisata Mewah 2024: Fokus pada Kesejahteraan',
-      en: 'Luxury Travel Trends 2024: Focusing on Wellness'
-    },
-    excerpt: {
-      id: 'Bagaimana wellness retreat menjadi prioritas utama bagi para traveler elit saat ini.',
-      en: 'How wellness retreats have become a top priority for today’s elite travelers.'
-    },
-    category: { id: 'Gaya Hidup', en: 'Lifestyle' },
-    date: '2024-05-10',
-    image: 'https://images.unsplash.com/photo-1544126592-807daa2b565b?auto=format&fit=crop&q=80&w=800',
-    readTime: '8 min read',
-    author: 'Robert Santoso'
-  },
-  {
-    id: 3,
-    title: {
-      id: 'Pengalaman Jet Pribadi: Kebebasan Tanpa Batas',
-      en: 'The Private Jet Experience: Boundless Freedom'
-    },
-    excerpt: {
-      id: 'Eksplorasi kemudahan dan kenyamanan terbang dengan jet pribadi untuk efisiensi waktu perjalanan Anda.',
-      en: 'Exploration of the ease and comfort of flying by private jet for your travel time efficiency.'
-    },
-    category: { id: 'Layanan', en: 'Service' },
-    date: '2024-05-05',
-    image: 'https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&q=80&w=800',
-    readTime: '5 min read',
-    author: 'Adi Pratama'
-  }
-];
+import { useContent } from '@/context/ContentContext';
 
 export default function BlogGrid() {
   const { language } = useLanguage();
+  const { content } = useContent();
   const [activeCategory, setActiveCategory] = useState('All');
+
+  const blogPosts = content.blog?.posts || [];
 
   const categories = language === 'id' 
     ? ['Semua', 'Destinasi', 'Gaya Hidup', 'Layanan']
@@ -127,7 +80,7 @@ export default function BlogGrid() {
         }}
         className="blog-grid"
         >
-          {blogPosts.map((post) => (
+          {blogPosts.map((post: any) => (
             <article
               key={post.id}
               style={{
@@ -143,7 +96,7 @@ export default function BlogGrid() {
               <div style={{ position: 'relative', height: '240px', overflow: 'hidden' }}>
                 <img
                   src={post.image}
-                  alt={post.title[language]}
+                  alt={post.title}
                   style={{
                     width: '100%',
                     height: '100%',
@@ -165,7 +118,7 @@ export default function BlogGrid() {
                   color: '#996515',
                   boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
                 }}>
-                  {post.category[language]}
+                  {post.category}
                 </div>
               </div>
 
@@ -191,7 +144,7 @@ export default function BlogGrid() {
                   color: 'var(--text-primary)',
                   transition: 'color 0.3s ease',
                 }}>
-                  {post.title[language]}
+                  {post.title}
                 </h3>
                 <p style={{
                   fontSize: '0.95rem',
@@ -199,7 +152,7 @@ export default function BlogGrid() {
                   lineHeight: 1.7,
                   marginBottom: '24px',
                 }}>
-                  {post.excerpt[language]}
+                  {post.excerpt}
                 </p>
                 <Link href={`/blog/${post.id}`} style={{
                   display: 'inline-flex',

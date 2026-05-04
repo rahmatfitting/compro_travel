@@ -5,6 +5,7 @@ export const translations = {
       about: 'Tentang Kami',
       services: 'Layanan',
       destinations: 'Destinasi',
+      blog: 'Blog',
       contact: 'Kontak',
       getStarted: 'Reservasi Sekarang',
     },
@@ -88,6 +89,15 @@ export const translations = {
         { title: 'Keberangkatan', desc: 'Nikmati perjalanan Anda dengan tenang sementara tim concierge kami menangani segalanya.' }
       ]
     },
+    gallery: {
+      title: 'Galeri Destinasi Dunia',
+      subtitle: 'Koleksi lokasi pilihan yang menawarkan perpaduan sempurna antara keindahan alam dan kemewahan.',
+      list: [
+        { id: '1', name: 'Swiss Alps', location: 'Switzerland', image: '/exp_swiss_alps.png', tag: 'Adventure' },
+        { id: '2', name: 'Baa Atoll', location: 'Maldives', image: '/exp_maldives.png', tag: 'Relaxation' },
+        { id: '3', name: 'Oia', location: 'Santorini', image: '/exp_santorini.png', tag: 'Romantic' }
+      ]
+    },
     cta: {
       title: 'Siap Menulis Cerita Baru?',
       subtitle: 'Bergabunglah dengan komunitas traveler elit dan rasakan perbedaan layanan kelas atas yang sesungguhnya.',
@@ -123,6 +133,63 @@ export const translations = {
       },
       placeholder: 'Ketik pesan Anda...',
       wa: 'Hubungi via WhatsApp',
+    },
+    blog: {
+      posts: [
+        {
+          id: 1,
+          title: '5 Destinasi Rahasia di Maladewa untuk Liburan Privat',
+          excerpt: 'Temukan pulau-pulau tak berpenghuni dengan pasir putih kristal yang jarang diketahui oleh turis umum.',
+          category: 'Destinasi',
+          date: '2024-05-15',
+          image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&q=80&w=800',
+          readTime: '6 min read',
+          author: 'Elena Wijaya',
+          content: 'Pulau-pulau ini menawarkan privasi total dengan pemandangan yang menakjubkan.'
+        },
+        {
+          id: 2,
+          title: 'Tren Wisata Mewah 2024: Fokus pada Kesejahteraan',
+          excerpt: 'Bagaimana wellness retreat menjadi prioritas utama bagi para traveler elit saat ini.',
+          category: 'Gaya Hidup',
+          date: '2024-05-10',
+          image: 'https://images.unsplash.com/photo-1544126592-807daa2b565b?auto=format&fit=crop&q=80&w=800',
+          readTime: '8 min read',
+          author: 'Robert Santoso',
+          content: 'Wellness retreat kini bukan sekadar tren, melainkan kebutuhan mendasar.'
+        }
+      ]
+    },
+    products: {
+      list: [
+        {
+          id: 'tours',
+          title: 'Paket Tour Mewah',
+          tagline: 'Destinasi elit, pengalaman kurasi',
+          description: 'Pengalaman perjalanan yang dirancang khusus untuk kenyamanan dan kebahagiaan pribadi Anda.',
+          icon: '✈️',
+          color: '#d4af37',
+          gradient: 'linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05))',
+          features: ['Pemandu Pribadi', 'Transportasi Mewah', 'Akses Eksklusif']
+        },
+        {
+          id: 'charter',
+          title: 'Jet Pribadi & Yacht',
+          tagline: 'Privasi dan kebebasan mutlak',
+          description: 'Terbang atau berlayar dalam kemewahan mutlak dengan layanan carter pribadi kami.',
+          icon: '🛥️',
+          color: '#996515',
+          gradient: 'linear-gradient(135deg, rgba(153, 101, 21, 0.15), rgba(153, 101, 21, 0.05))',
+          features: ['Cakupan Global', 'Concierge 24/7', 'Jadwal Fleksibel']
+        }
+      ]
+    },
+    contactInfo: {
+      address: 'Jl. Kemewahan No. 123, Jakarta Selatan, Indonesia',
+      email: 'info@luxevoyage.com',
+      phone: '+62 812-3456-7890',
+      whatsapp: '6281234567890',
+      maps: 'https://goo.gl/maps/example',
     }
   },
   en: {
@@ -131,6 +198,7 @@ export const translations = {
       about: 'About Us',
       services: 'Services',
       destinations: 'Destinations',
+      blog: 'Blog',
       contact: 'Contact',
       getStarted: 'Book Now',
     },
@@ -214,6 +282,15 @@ export const translations = {
         { title: 'Departure', desc: 'Enjoy your journey with peace of mind while our concierge team handles everything.' }
       ]
     },
+    gallery: {
+      title: 'Curated World Destinations',
+      subtitle: 'Handpicked locations that offer the perfect blend of natural beauty and human ingenuity.',
+      list: [
+        { id: '1', name: 'Swiss Alps', location: 'Switzerland', image: '/exp_swiss_alps.png', tag: 'Adventure' },
+        { id: '2', name: 'Baa Atoll', location: 'Maldives', image: '/exp_maldives.png', tag: 'Relaxation' },
+        { id: '3', name: 'Oia', location: 'Santorini', image: '/exp_santorini.png', tag: 'Romantic' }
+      ]
+    },
     cta: {
       title: 'Ready to Write a New Story?',
       subtitle: 'Join a community of elite travelers and feel the difference of truly high-end service.',
@@ -249,6 +326,63 @@ export const translations = {
       },
       placeholder: 'Type your message...',
       wa: 'Contact via WhatsApp',
+    },
+    blog: {
+      posts: [
+        {
+          id: 1,
+          title: '5 Destinasi Rahasia di Maladewa untuk Liburan Privat',
+          excerpt: 'Temukan pulau-pulau tak berpenghuni dengan pasir putih kristal yang jarang diketahui oleh turis umum.',
+          category: 'Destinasi',
+          date: '2024-05-15',
+          image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&q=80&w=800',
+          readTime: '6 min read',
+          author: 'Elena Wijaya',
+          content: 'These islands offer total privacy with stunning views.'
+        },
+        {
+          id: 2,
+          title: 'Tren Wisata Mewah 2024: Fokus pada Kesejahteraan',
+          excerpt: 'Bagaimana wellness retreat menjadi prioritas utama bagi para traveler elit saat ini.',
+          category: 'Gaya Hidup',
+          date: '2024-05-10',
+          image: 'https://images.unsplash.com/photo-1544126592-807daa2b565b?auto=format&fit=crop&q=80&w=800',
+          readTime: '8 min read',
+          author: 'Robert Santoso',
+          content: 'Wellness retreats are now a fundamental need.'
+        }
+      ]
+    },
+    products: {
+      list: [
+        {
+          id: 'tours',
+          title: 'Luxury Tour Packages',
+          tagline: 'Elite destinations, curated experiences',
+          description: 'Bespoke travel experiences meticulously designed for your comfort and personal joy.',
+          icon: '✈️',
+          color: '#d4af37',
+          gradient: 'linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05))',
+          features: ['Private Guides', 'Luxury Transport', 'Exclusive Access']
+        },
+        {
+          id: 'charter',
+          title: 'Private Jet & Yacht',
+          tagline: 'Ultimate privacy and freedom',
+          description: 'Fly or sail in absolute luxury with our private charter services.',
+          icon: '🛥️',
+          color: '#996515',
+          gradient: 'linear-gradient(135deg, rgba(153, 101, 21, 0.15), rgba(153, 101, 21, 0.05))',
+          features: ['Global Coverage', '24/7 Concierge', 'Flexible Schedule']
+        }
+      ]
+    },
+    contactInfo: {
+      address: 'Luxury Street No. 123, South Jakarta, Indonesia',
+      email: 'info@luxevoyage.com',
+      phone: '+62 812-3456-7890',
+      whatsapp: '6281234567890',
+      maps: 'https://goo.gl/maps/example',
     }
   }
 };
