@@ -123,6 +123,7 @@ export default function AdminLayout({
         top: 0,
         height: '100vh',
         boxShadow: '4px 0 20px rgba(0,0,0,0.1)',
+        overflowY: 'auto',
       }}>
         {/* Logo */}
         <div style={{
@@ -311,6 +312,19 @@ export default function AdminLayout({
         body {
           margin: 0;
           padding: 0;
+        }
+        aside::-webkit-scrollbar {
+          width: 4px;
+        }
+        aside::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.02);
+        }
+        aside::-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.1);
+          borderRadius: 10px;
+        }
+        aside::-webkit-scrollbar-thumb:hover {
+          background: rgba(255, 255, 255, 0.2);
         }
       `}</style>
     </div>
